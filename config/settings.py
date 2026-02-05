@@ -26,6 +26,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = []
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
     "allauth.socialaccount.providers.github",
+    "allauth.socialaccount.providers.telegram",
 ]
 
 MIDDLEWARE = [
@@ -129,6 +132,7 @@ LOGOUT_REDIRECT_URL = "/"
 # https://docs.allauth.org/en/latest/installation/quickstart.html
 
 SOCIALACCOUNT_PROVIDERS = {
+
     "google": {
         "SCOPE": ["profile", "email"],
         "FIELDS": ["email", "name", "first_name", "last_name"],
@@ -137,7 +141,16 @@ SOCIALACCOUNT_PROVIDERS = {
         },
         "OAUTH_PKCE_ENABLED": True,
     },
+
     "github": {
         "SCOPE": ["user:email"],
     },
+
+    "telegram": {
+        "APP": {
+            "client_id": "<bot_id>",
+            "secret": "<bot_token>",
+        },
+        "AUTH_PARAMS": {"auth_date_validity": 30},
+    }
 }
