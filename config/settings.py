@@ -24,9 +24,20 @@ SECRET_KEY = "django-insecure-uro4%c4r&udolsr%ia=g8bpx$o-%qv9tl1+t25@aank^5v8quu
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['locale.alijonov.uz']
 
-CSRF_TRUSTED_ORIGINS = []
+# Cloudflare Tunnel / reverse proxy
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+USE_X_FORWARDED_HOST = True
+
+# csrf trusted origins
+CSRF_TRUSTED_ORIGINS = ["https://locale.alijonov.uz"]
+
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+# Redirect all HTTP to HTTPS
+SECURE_SSL_REDIRECT = True
 
 # Application definition
 
