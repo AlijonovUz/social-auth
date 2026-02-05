@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>MyPlatform — Asosiy sahifa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-slate-950 text-slate-100">
+
+<!-- Background -->
+<div class="pointer-events-none fixed inset-0 -z-10">
+    <div class="absolute -top-24 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-indigo-500/20 blur-3xl"></div>
+    <div class="absolute -bottom-24 right-10 h-[420px] w-[420px] rounded-full bg-cyan-500/20 blur-3xl"></div>
+</div>
+
+<!-- Header -->
+<header class="sticky top-0 z-50 border-b border-white/10 bg-slate-950/70 backdrop-blur">
+    <div class="mx-auto max-w-6xl px-4 py-4 flex items-center justify-between">
+
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-3">
+        <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/10">
+          <svg class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </span>
+            <div>
+                <div class="font-semibold tracking-tight">MyPlatform</div>
+                <div class="text-xs text-slate-400">Minimal • Tez • Xavfsiz</div>
+            </div>
+        </a>
+
+        <!-- Nav -->
+        <nav class="hidden md:flex items-center gap-7 text-sm text-slate-300">
+            <a href="#features" class="hover:text-white">Imkoniyatlar</a>
+            <a href="#how" class="hover:text-white">Qanday ishlaydi</a>
+            <a href="#reviews" class="hover:text-white">Fikrlar</a>
+        </nav>
+
+        <!-- Actions -->
+        {% if not user.is_authenticated %}
+        <div class="flex items-center gap-2">
+            <a href="{% url 'login' %}"
+               class="rounded-xl bg-white/10 px-4 py-2 text-sm ring-1 ring-white/10 hover:bg-white/20">
+                Kirish
+            </a>
+            <a href="{% url 'login' %}"
+               class="hidden md:inline-flex rounded-xl bg-white px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-slate-200">
+                Boshlash
+            </a>
+        </div>
+        {% else %}
+        <div class="flex items-center gap-3">
+            <!-- Username -->
+            <span class="text-sm text-slate-300">
+              {{ user.username }}
+            </span>
+
+            <form action="/accounts/logout/" method="post">
+                {% csrf_token %}
+                <button
+                        type="submit"
+                        class="rounded-xl bg-white/10 px-4 py-2 text-sm ring-1 ring-white/10 hover:bg-white/20"
+                >
+                    Chiqish
+                </button>
+            </form>
+            {% endif %}
+
+        </div>
+</header>
+
+<!-- Hero -->
+<main class="mx-auto max-w-6xl px-4">
+    <section class="py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
+
+        <!-- Left -->
+        <div>
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs ring-1 ring-white/10">
+                <svg class="h-4 w-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                          d="M5 13l4 4L19 7"/>
+                </svg>
+                Tez va oson kirish
+            </div>
+
+            <h1 class="mt-5 text-4xl md:text-5xl font-bold leading-tight">
+                Zamonaviy platforma <br/>
+                <span class="bg-gradient-to-r from-indigo-300 to-cyan-300 bg-clip-text text-transparent">
+            biznesingiz uchun
+          </span>
+            </h1>
+
+            <p class="mt-4 max-w-xl text-slate-300">
+                Minimal dizayn, aniq yo‘nalish va kengaytirishga tayyor autentifikatsiya tizimi.
+            </p>
+
+            <div class="mt-8 flex gap-4">
+                {% if not user.is_authenticated %}
+                <a href="{% url 'login' %}"
+                   class="rounded-xl bg-white px-6 py-3 font-semibold text-slate-950 hover:bg-slate-200">
+                    Boshlash
+                </a>
+                {% endif %}
+                <a href="#features"
+                   class="rounded-xl bg-white/10 px-6 py-3 ring-1 ring-white/10 hover:bg-white/20">
+                    Batafsil
+                </a>
+            </div>
+
+            <!-- Stats -->
+            <div class="mt-10 grid grid-cols-3 gap-3 text-center text-xs">
+                <div class="rounded-2xl bg-white/5 p-4 ring-1 ring-white/10">
+                    <svg class="mx-auto h-5 w-5 mb-2 text-indigo-400" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor">
+                        <path stroke-width="2" d="M12 4v16m8-8H4"/>
+                    </svg>
+                    0 input
+                </div>
+                <div class="rounded-2xl bg-white/5 p-4 ring-1 ring-white/10">
+                    <svg class="mx-auto h-5 w-5 mb-2 text-cyan-400" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor">
+                        <path stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                    Tez ishlash
+                </div>
+                <div class="rounded-2xl bg-white/5 p-4 ring-1 ring-white/10">
+                    <svg class="mx-auto h-5 w-5 mb-2 text-emerald-400" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor">
+                        <path stroke-width="2" d="M12 11c0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3 3 1.343 3 3z"/>
+                    </svg>
+                    Xavfsiz
+                </div>
+            </div>
+        </div>
+
+        <!-- Right card -->
+        <div class="rounded-3xl bg-white/5 p-8 ring-1 ring-white/10">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="font-semibold">Dashboard preview</h3>
+                <span class="text-xs text-emerald-300 flex items-center gap-1">
+            <svg class="h-3 w-3" fill="currentColor" viewBox="0 0 8 8">
+              <circle cx="4" cy="4" r="4"/>
+            </svg>
+            Online
+          </span>
+            </div>
+
+            <div class="space-y-4">
+                <div class="rounded-xl bg-slate-900/60 p-4">
+                    <p class="text-sm text-slate-400">Faollik</p>
+                    <div class="mt-2 h-2 bg-white/10 rounded-full overflow-hidden">
+                        <div class="h-full w-[70%] bg-gradient-to-r from-indigo-400 to-cyan-300"></div>
+                    </div>
+                </div>
+
+                {% if not user.is_authenticated %}
+                <a href="{% url 'login' %}"
+                   class="block text-center rounded-xl bg-white px-5 py-3 font-semibold text-slate-950 hover:bg-slate-200">
+                    Kirish
+                </a>
+                {% endif %}
+            </div>
+        </div>
+
+    </section>
+</main>
+
+</body>
+</html>
